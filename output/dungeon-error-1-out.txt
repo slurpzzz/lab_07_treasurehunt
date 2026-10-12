@@ -1,0 +1,1 @@
+DungeonException: cannot have a east neighbor: (1,3)

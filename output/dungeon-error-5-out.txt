@@ -1,0 +1,1 @@
+DungeonException: columns must be greater than zero: -1

@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TreasureHunt dungeon-error-6.txt" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="dungeon.TreasureHunt" />
+    <module name="DungeonCrawler" />
+    <option name="PROGRAM_PARAMETERS" value="data/dungeon-error-6.txt" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="dungeon.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
