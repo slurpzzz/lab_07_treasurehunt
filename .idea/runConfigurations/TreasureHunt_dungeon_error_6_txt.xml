@@ -1,7 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="TreasureHunt dungeon-error-6.txt" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="liberica-25" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="dungeon.TreasureHunt" />
-    <module name="DungeonCrawler" />
+    <module name="TreasureHunt" />
     <option name="PROGRAM_PARAMETERS" value="data/dungeon-error-6.txt" />
     <extension name="coverage">
       <pattern>
