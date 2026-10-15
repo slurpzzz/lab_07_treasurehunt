@@ -93,9 +93,9 @@ public interface IDungeon {
 
     /**
      * Get the string value of the cell at a location in the dungeon.
-     * It returns one of three things.  The HOME cell for the home
+     * It returns one of three things.  The IDungeon.HOME cell for the home
      * position, the treasure name if the treasure is not collected yet,
-     * or CELL if the treasure was collected.
+     * or IDungeon.CELL if the treasure was collected.
      *
      * @param location the location
      * @return the string at that location
