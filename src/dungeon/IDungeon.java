@@ -9,25 +9,43 @@ import java.util.Collection;
  */
 public interface IDungeon {
     // DUNGEON FILE CONTENTS
-    /** cell string (no home or treasure) */
+    /**
+     * cell string (no home or treasure)
+     */
     String CELL = ".";
-    /** north neighbor */
+    /**
+     * north neighbor
+     */
     String NORTH = "N";
-    /** south neighbor */
+    /**
+     * south neighbor
+     */
     String SOUTH = "S";
-    /** east neighbor */
+    /**
+     * east neighbor
+     */
     String EAST = "E";
-    /** west neighbor */
+    /**
+     * west neighbor
+     */
     String WEST = "W";
 
     // DUNGEON OUTPUT
-    /** empty */
+    /**
+     * empty
+     */
     String EMPTY = " ";
-    /** horizontal wall */
+    /**
+     * horizontal wall
+     */
     String HORI_WALL = "-";
-    /** vertical wall */
+    /**
+     * vertical wall
+     */
     String VERT_WALL = "|";
-    /** home string */
+    /**
+     * home string
+     */
     String HOME = "*";
 
     /**
@@ -69,7 +87,7 @@ public interface IDungeon {
     /**
      * Is dest a neighbor of src in the dungeon?
      *
-     * @param src the source cell
+     * @param src  the source cell
      * @param dest the destination cell
      * @return whether they are neighbors or not
      */
@@ -115,6 +133,7 @@ public interface IDungeon {
      * 2|. . .|C|
      *   -------
      * </pre>
+     *
      * @return the string
      */
     default String display() {
@@ -122,15 +141,15 @@ public interface IDungeon {
         StringBuilder result = new StringBuilder("  ");
 
         // top rows are the column indices and horizontal bars
-        for (int col=0; col<getCols(); ++col) {
+        for (int col = 0; col < getCols(); ++col) {
             result.append(col).append(" ");
         }
         result.append(System.lineSeparator()).append("  ");
-        result.append(HORI_WALL.repeat(Math.max(0, getCols()*2-1)));
+        result.append(HORI_WALL.repeat(Math.max(0, getCols() * 2 - 1)));
         result.append(System.lineSeparator());
 
         // each row gets built out here with the row number and cell values
-        for (int row=0; row<getRows(); ++row) {
+        for (int row = 0; row < getRows(); ++row) {
             result.append(row).append(VERT_WALL);
             // this loop is for the row of cells and the horizontal connections
             for (int col = 0; col < getCols(); ++col) {
@@ -160,7 +179,7 @@ public interface IDungeon {
         }
         // the bottom row
         result.append("  ");
-        result.append(HORI_WALL.repeat(Math.max(0, getCols()*2-1)));
+        result.append(HORI_WALL.repeat(Math.max(0, getCols() * 2 - 1)));
         return result.toString();
     }
 }

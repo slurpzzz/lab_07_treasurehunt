@@ -8,10 +8,15 @@ import java.util.*;
 /**
  * Student implementation of the dungeon.
  *
- * @author YOUR NAME HERE
+ * @author Justin Spadone
  */
 public class Dungeon implements IDungeon {
     // TODO
+    private static int rows;
+    private static int cols;
+    private LinkedHashMap<Coordinates, LinkedHashSet<Coordinates>> graph = new LinkedHashMap<>();
+    private ArrayList<Treasure> treasures = new ArrayList<>();
+    private Coordinates home;
 
     /**
      * Create a new dungeon from a file.
@@ -25,65 +30,89 @@ public class Dungeon implements IDungeon {
             // first line is: rows cols
             String line = in.readLine();
             String[] fields = line.split("\\s+");
+            rows = Integer.parseInt(fields[0]);
+            cols = Integer.parseInt(fields[1]);
             // e.g. to read number of rows: Integer.parseInt(fields[0]);
             // e.g. to read number of columns: Integer.parseInt(fields[1]);
-
+            for (int row = 0; row < rows; row++) {
+                String[] cells = in.readLine().split("\\s+");
+                for (int col = 0; col < cols; col++) {
+                    String cell = cells[col];
+                    LinkedHashSet<Coordinates> neighbors = new LinkedHashSet<>();
+                    if (cell.contains("N")) neighbors.add(new Coordinates(row - 1, col));
+                    if (cell.contains("S")) neighbors.add(new Coordinates(row + 1, col));
+                    if (cell.contains("E")) neighbors.add(new Coordinates(row, col + 1));
+                    if (cell.contains("W")) neighbors.add(new Coordinates(row, col - 1));
+                    graph.put(new Coordinates(row, col), neighbors);
+                }
+            }
+            System.out.println(graph);
+            String homeCoord = in.readLine().split(" ")[1];
+            home = new Coordinates(homeCoord);
+            int numTreasures = Integer.parseInt(in.readLine());
+            for (int i = 0; i < numTreasures; i++) {
+                String[] treasure = in.readLine().split(" ");
+                treasures.add(new Treasure(treasure[0], new Coordinates(treasure[1])));
+            }
             // TODO
         } // any exceptions generated will get thrown to the main program
     }
 
     @Override
     public int getRows() {
-        // TODO
-        return 0;
+        return rows;
     }
 
     @Override
     public int getCols() {
-        // TODO
-        return 0;
+        return cols;
     }
 
     @Override
     public boolean hasCoordinates(Coordinates location) {
         // TODO
-        return false;
+        return graph.containsKey(location);
     }
 
     @Override
     public boolean isNeighbor(Coordinates src, Coordinates dest) {
         // TODO
-        return false;
+        return graph.get(src).contains(dest);
     }
 
     @Override
     public String getCell(Coordinates location) {
         // TODO
-        return null;
+        if(home.equals(location)) return HOME;
+        for(Treasure treasure : treasures){
+            if (treasure.getLocation().equals(location)){
+                if(treasure.isCollected()) return CELL;
+                return treasure.getName();
+            }
+        }
+        return CELL;
     }
 
     @Override
     public Coordinates getHome() {
-        // TODO
-        return null;
+        return home;
     }
 
     @Override
     public boolean hasTreasure(Coordinates location) {
         // TODO
-        return false;
+        return treasures.stream().anyMatch(obj -> Objects.equals(location, obj.getLocation()));
     }
 
     @Override
     public Collection<Treasure> getTreasures() {
         // TODO
-        return new ArrayList<>();
+        return treasures;
     }
 
     @Override
     public Collection<Coordinates> getNeighbors(Coordinates location) {
-        // TODO
-        return new ArrayList<>();
+        return graph.get(location);
     }
 
     @Override
