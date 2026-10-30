@@ -14,9 +14,9 @@ public class Dungeon implements IDungeon {
     // TODO
     private static int rows;
     private static int cols;
-    private LinkedHashMap<Coordinates, LinkedHashSet<Coordinates>> graph = new LinkedHashMap<>();
-    private ArrayList<Treasure> treasures = new ArrayList<>();
-    private Coordinates home;
+    private final LinkedHashMap<Coordinates, LinkedHashSet<Coordinates>> graph = new LinkedHashMap<>();
+    private final ArrayList<Treasure> treasures = new ArrayList<>();
+    private final Coordinates home;
 
     /**
      * Create a new dungeon from a file.
@@ -46,7 +46,6 @@ public class Dungeon implements IDungeon {
                     graph.put(new Coordinates(row, col), neighbors);
                 }
             }
-            System.out.println(graph);
             String homeCoord = in.readLine().split(" ")[1];
             home = new Coordinates(homeCoord);
             int numTreasures = Integer.parseInt(in.readLine());
@@ -83,10 +82,10 @@ public class Dungeon implements IDungeon {
     @Override
     public String getCell(Coordinates location) {
         // TODO
-        if(home.equals(location)) return HOME;
-        for(Treasure treasure : treasures){
-            if (treasure.getLocation().equals(location)){
-                if(treasure.isCollected()) return CELL;
+        if (home.equals(location)) return HOME;
+        for (Treasure treasure : treasures) {
+            if (treasure.getLocation().equals(location)) {
+                if (treasure.isCollected()) return CELL;
                 return treasure.getName();
             }
         }
