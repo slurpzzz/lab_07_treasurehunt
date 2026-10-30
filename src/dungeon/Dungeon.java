@@ -13,7 +13,6 @@ import java.util.*;
  * @author Justin Spadone
  */
 public class Dungeon implements IDungeon {
-    // TODO
     private static int rows;
     private static int cols;
     private final LinkedHashMap<Coordinates, LinkedHashSet<Coordinates>> graph = new LinkedHashMap<>();
@@ -56,7 +55,6 @@ public class Dungeon implements IDungeon {
                 String[] treasure = in.readLine().split(" ");
                 treasures.add(new Treasure(treasure[0], new Coordinates(treasure[1])));
             }
-            // TODO
         } // any exceptions generated will get thrown to the main program
     }
 
@@ -96,19 +94,16 @@ public class Dungeon implements IDungeon {
 
     @Override
     public boolean hasCoordinates(Coordinates location) {
-        // TODO
         return graph.containsKey(location);
     }
 
     @Override
     public boolean isNeighbor(Coordinates src, Coordinates dest) {
-        // TODO
         return graph.get(src).contains(dest);
     }
 
     @Override
     public String getCell(Coordinates location) {
-        // TODO
         if (home.equals(location)) return HOME;
         for (Treasure treasure : treasures) {
             if (treasure.getLocation().equals(location)) {
@@ -126,13 +121,11 @@ public class Dungeon implements IDungeon {
 
     @Override
     public boolean hasTreasure(Coordinates location) {
-        // TODO
         return treasures.stream().anyMatch(obj -> Objects.equals(location, obj.getLocation()));
     }
 
     @Override
     public Collection<Treasure> getTreasures() {
-        // TODO
         return treasures;
     }
 
