@@ -34,6 +34,10 @@ public class Dungeon implements IDungeon {
             String[] fields = line.split("\\s+");
             rows = Integer.parseInt(fields[0]);
             cols = Integer.parseInt(fields[1]);
+            if (rows <= 0 && cols <= 0)
+                throw new DungeonException("rows and columns must be greater than zero: " + rows + " " + cols);
+            else if (rows <= 0) throw new DungeonException("rows must be greater than zero: " + rows);
+            else if (cols <= 0) throw new DungeonException("columns must be greater than zero: " + cols);
             // e.g. to read number of rows: Integer.parseInt(fields[0]);
             // e.g. to read number of columns: Integer.parseInt(fields[1]);
             for (int row = 0; row < rows; row++) {
