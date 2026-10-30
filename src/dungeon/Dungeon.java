@@ -1,5 +1,7 @@
 package dungeon;
 
+import org.jspecify.annotations.NonNull;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,12 +39,7 @@ public class Dungeon implements IDungeon {
             for (int row = 0; row < rows; row++) {
                 String[] cells = in.readLine().split("\\s+");
                 for (int col = 0; col < cols; col++) {
-                    String cell = cells[col];
-                    LinkedHashSet<Coordinates> neighbors = new LinkedHashSet<>();
-                    if (cell.contains("N")) neighbors.add(new Coordinates(row - 1, col));
-                    if (cell.contains("S")) neighbors.add(new Coordinates(row + 1, col));
-                    if (cell.contains("E")) neighbors.add(new Coordinates(row, col + 1));
-                    if (cell.contains("W")) neighbors.add(new Coordinates(row, col - 1));
+                    LinkedHashSet<Coordinates> neighbors = getNeighbors(cells, row, col);
                     graph.put(new Coordinates(row, col), neighbors);
                 }
             }
@@ -55,6 +52,30 @@ public class Dungeon implements IDungeon {
             }
             // TODO
         } // any exceptions generated will get thrown to the main program
+    }
+
+    private static @NonNull LinkedHashSet<Coordinates> getNeighbors(String[] cells, int row, int col) throws DungeonException {
+        String cell = cells[col];
+        LinkedHashSet<Coordinates> neighbors = new LinkedHashSet<>();
+        if (cell.contains("N")) {
+            if (row == 0) throw new DungeonException("cannot have a north neighbor: (%d,%d)".formatted(row, col));
+            neighbors.add(new Coordinates(row - 1, col));
+        }
+        if (cell.contains("S")) {
+            if (row == rows - 1)
+                throw new DungeonException("cannot have a south neighbor: (%d,%d)".formatted(row, col));
+            neighbors.add(new Coordinates(row + 1, col));
+        }
+        if (cell.contains("E")) {
+            if (col == cols - 1)
+                throw new DungeonException("cannot have an east neighbor: (%d,%d)".formatted(row, col));
+            neighbors.add(new Coordinates(row, col + 1));
+        }
+        if (cell.contains("W")) {
+            if (col == 0) throw new DungeonException("cannot have a west neighbor: (%d,%d)".formatted(row, col));
+            neighbors.add(new Coordinates(row, col - 1));
+        }
+        return neighbors;
     }
 
     @Override
