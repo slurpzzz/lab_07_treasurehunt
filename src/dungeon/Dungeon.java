@@ -47,7 +47,9 @@ public class Dungeon implements IDungeon {
                     graph.put(new Coordinates(row, col), neighbors);
                 }
             }
-            String homeCoord = in.readLine().split(" ")[1];
+            String homeLine = in.readLine();
+            if (!homeLine.contains("*")) throw new DungeonException("home position not specified!");
+            String homeCoord = homeLine.split(" ")[1];
             home = new Coordinates(homeCoord);
             int numTreasures = Integer.parseInt(in.readLine());
             for (int i = 0; i < numTreasures; i++) {
