@@ -32,7 +32,12 @@ public class TreasureHunt {
         System.out.println(this.dungeon);
     }
 
-
+    /**
+     * Uses BFS to find the shortest path between given coordinates
+     * @param start starting coordinate of BFS
+     * @param finish ending coordinate of BFS
+     * @return The list of coordinates of the shortest path from start to finish. Null if no path exists.
+     */
     private List<Coordinates> getShortestPath(Coordinates start, Coordinates finish) {
         Map<Coordinates, Coordinates> predecessorMap = new HashMap<>();
         Queue<Coordinates> queue = new ArrayDeque<>();
